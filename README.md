@@ -164,7 +164,7 @@ The website comes with pre-populated dummy data:
 
 For questions or issues, please contact the restaurant at:
 - Phone: +91 98765 43210
-- Email: hello@annapoorna.com
+- Email: dineshm8870449432@gmail.com
 
 ## 📄 License
 
@@ -173,3 +173,4 @@ This project is created for Sri Annapoorna Idly Kadai. All rights reserved.
 ---
 
 **Developed with ❤️ for authentic South Indian cuisine**
+
