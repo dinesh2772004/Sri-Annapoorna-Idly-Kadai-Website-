@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel | Sri Annapoorna Idly Kadai</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+
+<body>
+
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <aside class="admin-sidebar">
+            <div class="admin-logo">
+                <i class="fas fa-utensils"></i>
+                <h2>Admin Panel</h2>
+            </div>
+            <nav class="admin-nav">
+                <a href="#menu" class="admin-nav-link active" data-section="menu">
+                    <i class="fas fa-book"></i> Menu Management
+                </a>
+                <a href="#offers" class="admin-nav-link" data-section="offers">
+                    <i class="fas fa-tags"></i> Offers Management
+                </a>
+                <a href="#" onclick="window.location.href='index.html'" class="admin-nav-link">
+                    <i class="fas fa-home"></i> Back to Website
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <header class="admin-header">
+                <h1>Restaurant Management</h1>
+                <div class="admin-user">
+                    <i class="fas fa-user-circle"></i>
+                    <span>Admin</span>
+                </div>
+            </header>
+
+            <!-- Menu Management Section -->
+            <section id="menu-section" class="admin-section active">
+                <div class="section-header">
+                    <h2>Menu Management</h2>
+                    <button class="btn" onclick="openAddItemModal()">
+                        <i class="fas fa-plus"></i> Add New Item
+                    </button>
+                </div>
+
+                <div class="admin-tabs">
+                    <button class="tab-btn active" data-category="breakfast">Breakfast</button>
+                    <button class="tab-btn" data-category="specials">Kadai Specials</button>
+                    <button class="tab-btn" data-category="beverages">Beverages</button>
+                </div>
+
+                <div class="admin-table-container">
+                    <table class="admin-table" id="menu-table">
+                        <thead>
+                            <tr>
+                                <th>Image</th>
+                                <th>Name</th>
+                                <th>Price</th>
+                                <th>Description</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="menu-tbody">
+                            <!-- Populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Offers Management Section -->
+            <section id="offers-section" class="admin-section">
+                <div class="section-header">
+                    <h2>Offers Management</h2>
+                    <button class="btn" onclick="openAddOfferModal()">
+                        <i class="fas fa-plus"></i> Add New Offer
+                    </button>
+                </div>
+
+                <div class="offers-admin-grid" id="offers-admin-grid">
+                    <!-- Populated by JS -->
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Add/Edit Menu Item Modal -->
+    <div id="item-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title">Add Menu Item</h2>
+                <span class="modal-close" onclick="closeItemModal()">&times;</span>
+            </div>
+            <form id="item-form">
+                <input type="hidden" id="item-id">
+
+                <div class="form-group">
+                    <label for="item-name">Item Name</label>
+                    <input type="text" id="item-name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="item-category">Category</label>
+                    <select id="item-category" required>
+                        <option value="breakfast">Breakfast</option>
+                        <option value="specials">Kadai Specials</option>
+                        <option value="beverages">Beverages</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="item-price">Price (₹)</label>
+                    <input type="number" id="item-price" required min="0">
+                </div>
+
+                <div class="form-group">
+                    <label for="item-description">Description</label>
+                    <textarea id="item-description" rows="3" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="item-image">Image URL</label>
+                    <input type="url" id="item-image" required>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeItemModal()">Cancel</button>
+                    <button type="submit" class="btn">Save Item</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add/Edit Offer Modal -->
+    <div id="offer-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="offer-modal-title">Add Offer</h2>
+                <span class="modal-close" onclick="closeOfferModal()">&times;</span>
+            </div>
+            <form id="offer-form">
+                <input type="hidden" id="offer-id">
+
+                <div class="form-group">
+                    <label for="offer-title">Offer Title</label>
+                    <input type="text" id="offer-title" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="offer-description">Description</label>
+                    <textarea id="offer-description" rows="3" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="offer-discount">Discount Badge</label>
+                    <input type="text" id="offer-discount" placeholder="e.g., 30% OFF" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="offer-validity">Validity</label>
+                    <input type="text" id="offer-validity" placeholder="e.g., Valid till: 31st Dec 2025" required>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeOfferModal()">Cancel</button>
+                    <button type="submit" class="btn">Save Offer</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+
+</html>
